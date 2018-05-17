@@ -26,7 +26,7 @@ public class Sistema {
             cliente.getConta().transferencia(total);
             Compra compra = new Compra (baseDeCompras.getComprasSize() + 1, LocalDateTime.now(), cliente, produtos, total);
             System.out.println("Data e hora da compra efetuada:");
-System.out.println(compra.getDataHora());
+            System.out.println(compra.getDataHora());
             baseDeCompras.add(compra);
             for (Produto prod: produtos) {
                 baseDeProdutos.remove(prod);

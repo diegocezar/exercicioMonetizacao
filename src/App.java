@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args ){
 
         System.out.println("---Sistema de Monetização---");
         BaseDeClientes baseDeClientes = inicializaClientes();
@@ -13,11 +13,11 @@ public class App {
         BaseDeCompras baseDeCompras = new BaseDeCompras();
 
         Sistema sistema = new Sistema(baseDeProdutos, baseDeClientes, baseDeCompras);
-
+        Cliente cliente = new Cliente(null, null, null, null);
         Scanner menu = new Scanner(System.in);
         do {
-            imprimirMenu();
-            switch (menu.next()) {
+            imprimirMenu();           
+            switch (menu.nextLine()) {
                 case "1":
                     System.out.println("Para criar um novo Cliente:");
                     System.out.println("Digite um CPF:");
@@ -26,15 +26,16 @@ public class App {
                     String nome = menu.next();
                     System.out.println("Digite um Email:");
                     String email = menu.next();
-                    Cliente cliente = new Cliente(cpf, nome, email, new Conta(126, 0.0));
-
-                    if (baseDeClientes.addClientes(cliente)) {
-                        System.out.println("SUCESSO");
+                    if(cpf.matches("\\d+") && nome.matches("[a-z]+")) {
+                    	  cliente = new Cliente(cpf, nome, email, new Conta(126, 0.0));
+                    	 if (baseDeClientes.addClientes(cliente)) {
+                        System.out.println("Cliente adicionado com sucesso!");
                         System.out.println(cliente.toString());
-                    } else {
-                        System.out.println("CPF Invalido");
-                    }
-                    break;
+                      } 
+                   } else {
+                       System.out.println("Revise seu cpf ou nome");
+                   }                  
+                    break;                   
                 case "2":
                     System.out.println("Criar novos produtos");
                     System.out.println("Digite a ID do Produto");
@@ -129,7 +130,7 @@ public class App {
                     System.out.println("Listar maiores compradores"); 
                     HashMap<Cliente, Integer> clientesQueMaisCompram = baseDeCompras.clientesQueMaisCompram();
                     System.out.println(Arrays.asList(clientesQueMaisCompram));
-                        break;    
+                    break;    
                 case "0":
                     System.out.println("Sair");
                     System.exit(0);
@@ -138,27 +139,28 @@ public class App {
                     System.out.println("Opção inválida");
                     break;
             }
-        } while (!menu.next().equals("0"));
+        } while (!menu.nextLine().equals("0"));
+        return;
     }
 
     private static BaseDeClientes inicializaClientes() {
         BaseDeClientes baseDeClientes = new BaseDeClientes();
-        baseDeClientes.addClientes(new Cliente("99999999", "Dino", "dino@silvasauro.com", new Conta(123, 100.00)));
-        baseDeClientes.addClientes(new Cliente("00000000", "Baby", "baby@silvasauro.com", new Conta(124, 100.00)));
+        baseDeClientes.addClientes(new Cliente("999", "Dino", "dino@silvasauro.com", new Conta(123, 100.00)));
+        baseDeClientes.addClientes(new Cliente("000", "Baby", "baby@silvasauro.com", new Conta(124, 100.00)));
         baseDeClientes.addClientes(new Cliente("111", "Sushi", "sushi@silvasauro.com", new Conta(125, 100.00)));
-        baseDeClientes.addClientes(new Cliente("123", "Diego", "diego@email.com", new Conta(125, 100.00)));
+        baseDeClientes.addClientes(new Cliente("123", "Diego", "diego@email.com", new Conta(126, 0.00)));
         return baseDeClientes;
     }
 
     private static BaseDeProdutos inicializaProdutos() {
         BaseDeProdutos baseDeProdutos = new BaseDeProdutos();
         baseDeProdutos.addProduto(new Produto(1, 10.0, "Bolo"));
-        baseDeProdutos.addProduto(new Produto(1, 10.0, "Bolo"));
-        baseDeProdutos.addProduto(new Produto(1, 10.0, "Bolo"));
-        baseDeProdutos.addProduto(new Produto(1, 10.0, "Bolo"));
-        baseDeProdutos.addProduto(new Produto(2, 10.0, "Chocolate"));
-        baseDeProdutos.addProduto(new Produto(2, 10.0, "Chocolate"));
+        baseDeProdutos.addProduto(new Produto(2, 5.0, "Chocolate"));
+        baseDeProdutos.addProduto(new Produto(3, 15.0, "Pizza"));
+        baseDeProdutos.addProduto(new Produto(4, 7.0, "Torrada"));
 
+        
+        
         return baseDeProdutos;
     }
 

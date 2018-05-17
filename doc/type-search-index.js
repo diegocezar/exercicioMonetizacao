@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"<Unnamed>","l":"App"},{"p":"<Unnamed>","l":"BaseDeClientes"},{"p":"<Unnamed>","l":"BaseDeCompras"},{"p":"<Unnamed>","l":"BaseDeProdutos"},{"p":"<Unnamed>","l":"Carrinho"},{"p":"<Unnamed>","l":"Cliente"},{"p":"<Unnamed>","l":"Compra"},{"p":"<Unnamed>","l":"Conta"},{"p":"<Unnamed>","l":"Produto"},{"p":"<Unnamed>","l":"Sistema"}]
